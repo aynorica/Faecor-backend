@@ -12,7 +12,7 @@ const image = require('./controllers/image');
 const auth = require('./controllers/authorization');
 
 //Database Setup - add your own information here based on the DB you created
-const { DB_HOST, DB_NAME, DB_PASSWORD, DB_TYPE, DB_USERNAME } = process.env
+const { DB_HOST, DB_NAME, DB_PASSWORD, DB_TYPE, DB_USERNAME, PORT } = process.env
 const db = knex({
   client: DB_TYPE,
   connection: {
@@ -35,6 +35,6 @@ app.post('/profile/:id', auth.requireAuth, (req, res) => { profile.handleProfile
 app.put('/image', auth.requireAuth, (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', auth.requireAuth, (req, res) => { image.handleApiCall(req, res)})
 
-app.listen(3000, ()=> {
+app.listen(PORT, ()=> {
   console.log('app is running on port 3000');
 })
