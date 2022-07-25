@@ -3,6 +3,7 @@ const bodyParser = require('body-parser'); // latest version of exressJS now com
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
+require('dotenv').config();
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -11,13 +12,14 @@ const image = require('./controllers/image');
 const auth = require('./controllers/authorization');
 
 //Database Setup - add your own information here based on the DB you created
+const { DB_HOST, DB_NAME, DB_PASSWORD, DB_TYPE, DB_USERNAME } = process.env
 const db = knex({
-  client: 'pg',
+  client: DB_TYPE,
   connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : 'Amirdlz1375',
-    database : 'faceor'
+    host : DB_HOST,
+    user : DB_USERNAME,
+    password : DB_PASSWORD,
+    database : DB_NAME
   }
 });
 
